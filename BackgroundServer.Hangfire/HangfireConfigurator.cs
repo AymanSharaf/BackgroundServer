@@ -19,7 +19,7 @@ namespace BackgroundServer.Hangfire
         }
         public void Configure(IServiceProvider serviceProvider)
         {
-            GlobalConfiguration.Configuration.UseSqlServerStorage(_configuration["BackgroundServer:HangfireConnection"])
+            GlobalConfiguration.Configuration.UseSqlServerStorage(_configuration["BackgroundServer:HangfireConnectionString"])
                                       .UseActivator(new HangfireAutofacActivator(serviceProvider))
                                       .UseColouredConsoleLogProvider();
         }
