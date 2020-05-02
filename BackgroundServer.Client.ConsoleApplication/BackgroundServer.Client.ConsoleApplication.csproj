@@ -3,6 +3,18 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>2309cfe4-92b3-4fa3-914d-c647b022dd58</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
+    <PackageReference Include="Topshelf" Version="4.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BackgroundServer.Abstractions\BackgroundServer.Abstractions.csproj" />
+    <ProjectReference Include="..\BackgroundServer.Hangfire\BackgroundServer.Hangfire.csproj" />
+  </ItemGroup>
 
 </Project>
