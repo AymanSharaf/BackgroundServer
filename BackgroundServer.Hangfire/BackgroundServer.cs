@@ -8,18 +8,17 @@ using System.Threading.Tasks;
 
 namespace BackgroundServer.Hangfire
 {
-    public class BackgroundServer : IBackgroundServer
+    public class BackgroundServer
     {
         private BackgroundJobServer _backgroundServer;
         public BackgroundServer()
         {
-         
         }
         public void Start()
         {
             if (_backgroundServer == null)
             {
-                _backgroundServer = new BackgroundJobServer();
+                _backgroundServer = new BackgroundJobServer(); // Hangfire server options go here 
             }
         }
 

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BackgroundServer.Abstractions
 {
-    public interface IBackgroundServer
+    public interface IBackgroundServerManager
     {
-        void Start();
+        void Start(IServiceProvider serviceProvider);
         void Stop();
     }
 }
