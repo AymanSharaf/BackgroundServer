@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BackgroundServer.Abstractions;
 using BackgroundServer.Hangfire.Schedulers;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace BackgroundServer.Hangfire
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<HangfireConfigurator>().AsImplementedInterfaces();
-            builder.RegisterType<BackgroundServer>().AsImplementedInterfaces();
+            builder.RegisterType<HangfireConfigurator>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<BackgroundServer>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<IBackgroundServerManager>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<FireAndForgetJobScheduler>().AsImplementedInterfaces();
         }
     }
