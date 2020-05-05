@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BackgroundServer.Client.ConsoleApplication": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
