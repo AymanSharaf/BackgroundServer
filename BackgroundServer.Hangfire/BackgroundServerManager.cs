@@ -18,9 +18,9 @@ namespace BackgroundServer.Hangfire
             _backgroundServer = new BackgroundServer(); // Local Default
         }
 
-        public void Start(IServiceProvider serviceProvider)
+        public void Start(IServiceProvider serviceProvider, string connectionString)
         {
-            _backgroundServerConfigurator.Configure(serviceProvider);
+            _backgroundServerConfigurator.Configure(serviceProvider, connectionString);
             _backgroundServer.Start();
         }
 

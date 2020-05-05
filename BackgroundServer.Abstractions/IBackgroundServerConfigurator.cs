@@ -8,6 +8,6 @@ namespace BackgroundServer.Abstractions
 {
     public interface IBackgroundServerConfigurator
     {
-        void Configure(IServiceProvider serviceProvider);
+        void Configure(IServiceProvider serviceProvider, string connectionString);
     }
 }

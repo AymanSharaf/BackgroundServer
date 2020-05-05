@@ -11,15 +11,12 @@ namespace BackgroundServer.Hangfire
 {
     public class HangfireConfigurator : IBackgroundServerConfigurator
     {
-        private readonly IConfiguration _configuration;
-
-        public HangfireConfigurator(IConfiguration configuration)
-        {
-            _configuration = configuration;
+        public HangfireConfigurator()
+        { 
         }
-        public void Configure(IServiceProvider serviceProvider)
+        public void Configure(IServiceProvider serviceProvider, string connectionString)
         {
-            GlobalConfiguration.Configuration.UseSqlServerStorage(_configuration["BackgroundServer:HangfireConnectionString"])
+            GlobalConfiguration.Configuration.UseSqlServerStorage(connectionString)
                                       .UseActivator(new HangfireAutofacActivator(serviceProvider))
                                       .UseColouredConsoleLogProvider();
         }

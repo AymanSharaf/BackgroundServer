@@ -26,14 +26,15 @@ namespace BackgroundServer.Client.ConsoleApplication
         {
             var topshelfEnabled = false;
             bool.TryParse(_configuration["BackgroundServer:TopshelfEnabled"], out topshelfEnabled);
+            var connectionString = _configuration["BackgroundServer:HangfireConnectionString"];
 
             if (topshelfEnabled)
             {
-                _topshelfStarter.Start(host);
+                _topshelfStarter.Start(host, connectionString);
             }
             else
             {
-                _backgroundServerManager.Start(host.Services);
+                _backgroundServerManager.Start(host.Services, connectionString);
             }
 
         }

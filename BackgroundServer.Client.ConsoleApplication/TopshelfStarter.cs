@@ -12,7 +12,7 @@ namespace BackgroundServer.Client.ConsoleApplication
 {
     public class TopshelfStarter
     {
-        internal void Start(IHost host)
+        internal void Start(IHost host, string connectionString)
         {
             HostFactory.Run(hostConfigrator =>
             {
@@ -25,7 +25,7 @@ namespace BackgroundServer.Client.ConsoleApplication
                     });
                     service.WhenStarted(s =>
                     {
-                        s.Start(host.Services);
+                        s.Start(host.Services, connectionString);
                     });
                     service.WhenStopped(service => service.Stop());
                 });
