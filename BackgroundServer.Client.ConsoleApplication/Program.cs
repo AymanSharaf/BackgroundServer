@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
@@ -25,8 +26,6 @@ namespace BackgroundServer.Client.ConsoleApplication
         {
             var environmentName = Environment.GetEnvironmentVariable("ENVIRONMENT");
 
-            var builder = new ContainerBuilder();
-
             var hostBuilder = new HostBuilder()
                .ConfigureAppConfiguration((hostContext, config) =>
                {
@@ -42,17 +41,16 @@ namespace BackgroundServer.Client.ConsoleApplication
                    }
 
                }).UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureContainer<ContainerBuilder>(builder =>
-            {
-                builder.RegisterAssemblyModules(typeof(Hangfire.BackgroundServer).Assembly);
-                builder.RegisterType<ProgramStarter>().SingleInstance();
-                builder.RegisterType<TopshelfStarter>().SingleInstance();
-            });
+                 .ConfigureContainer<ContainerBuilder>(builder =>
+                 {
+                     builder.RegisterAssemblyModules(typeof(Hangfire.BackgroundServer).Assembly);
+                     builder.RegisterType<ProgramStarter>().SingleInstance();
+                     builder.RegisterType<TopshelfStarter>().SingleInstance();
+                 });
 
-            var container = builder.Build();
             var host = hostBuilder.Build();
 
-            var programStarter = container.Resolve<ProgramStarter>();
+            var programStarter = host.Services.GetService(typeof(ProgramStarter)) as ProgramStarter;
             programStarter.Start(host);
 
         }
