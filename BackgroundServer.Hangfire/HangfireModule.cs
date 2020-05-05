@@ -15,7 +15,7 @@ namespace BackgroundServer.Hangfire
         {
             builder.RegisterType<HangfireConfigurator>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<BackgroundServer>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<IBackgroundServerManager>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<BackgroundServerManager>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<FireAndForgetJobScheduler>().AsImplementedInterfaces();
         }
     }
