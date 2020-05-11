@@ -16,9 +16,19 @@ namespace BackgroundServer.Hangfire.Schedulers
             return BackgroundJob.ContinueJobWith(parentJobId, methodCall);
         }
 
+        public string ContinueJobWith<T>(string parentJobId, Expression<Action<T>> methodCall, TimeSpan delay)
+        {
+            return BackgroundJob.ContinueJobWith(parentJobId,()=> BackgroundJob.Schedule(methodCall, delay));
+        }
+
         public string EnqueueJob<T>(Expression<Action<T>> methodCall)
         {
             return BackgroundJob.Enqueue<T>(methodCall);
+        }
+
+        public string EnqueueJob<T>(Expression<Action<T>> methodCall, TimeSpan delay)
+        {
+            return BackgroundJob.Schedule(methodCall, delay);
         }
     }
 }

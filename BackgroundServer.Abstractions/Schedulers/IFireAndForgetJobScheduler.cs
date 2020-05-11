@@ -10,6 +10,8 @@ namespace BackgroundServer.Abstractions.Schedulers
     public interface IFireAndForgetJobScheduler
     {
         string EnqueueJob<T>(Expression<Action<T>> methodCall);
+        string EnqueueJob<T>(Expression<Action<T>> methodCall, TimeSpan delay);
         string ContinueJobWith<T>(string parentJobId, Expression<Action<T>> methodCall);
+        string ContinueJobWith<T>(string parentJobId, Expression<Action<T>> methodCall, TimeSpan delay);
     }
 }
