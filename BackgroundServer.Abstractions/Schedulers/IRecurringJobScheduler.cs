@@ -9,7 +9,7 @@ namespace BackgroundServer.Abstractions.Schedulers
 {
     public interface IRecurringJobScheduler
     {
-        void Register(IRecurringJob job);
-        void Remove(IRecurringJob job);
+        void Register<T>(T job) where T : class, IRecurringJob;
+        void Remove<T>(T job) where T : class, IRecurringJob;
     }
 }

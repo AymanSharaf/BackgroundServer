@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using BackgroundServer.Abstractions;
+using BackgroundServer.Hangfire.Initializers;
 using BackgroundServer.Hangfire.Schedulers;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace BackgroundServer.Hangfire
             builder.RegisterType<BackgroundServer>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<BackgroundServerManager>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<FireAndForgetJobScheduler>().AsImplementedInterfaces();
+            builder.RegisterType<RecurringJobScheduler>().AsImplementedInterfaces();
+            builder.RegisterType<RecurringJobsInitializer>().AsSelf();
         }
     }
 }

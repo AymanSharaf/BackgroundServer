@@ -8,7 +8,7 @@ namespace BackgroundServer.Abstractions
 {
     public interface IBackgroundServerManager
     {
-        void Start(IServiceProvider serviceProvider, string connectionString);
+        void Start(IServiceProvider serviceProvider, string connectionString, bool initializeRecurringJobs = false);
         void Stop();
     }
 }
