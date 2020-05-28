@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using BackgroundServer.Client.ConsoleApplication.Test;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,6 +47,7 @@ namespace BackgroundServer.Client.ConsoleApplication
                      builder.RegisterAssemblyModules(typeof(Hangfire.BackgroundServer).Assembly);
                      builder.RegisterType<ProgramStarter>().SingleInstance();
                      builder.RegisterType<TopshelfStarter>().SingleInstance();
+                     builder.RegisterType<HelloWorldRecurringJob>().AsImplementedInterfaces();
                  });
 
             var host = hostBuilder.Build();
