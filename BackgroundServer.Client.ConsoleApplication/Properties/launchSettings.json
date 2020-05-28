@@ -5,6 +5,9 @@
       "environmentVariables": {
         "ENVIRONMENT": "Development"
       }
+    },
+    "Docker": {
+      "commandName": "Docker"
     }
   }
 }

@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+    sqlserver:
+        image: "mcr.microsoft.com/mssql/server:2017-latest-ubuntu"
+        container_name: SqlServer
+        environment:
+            MSSQL_SA_PASSWORD: "P@ssw0rd"
+            ACCEPT_EULA: "Y"
+        ports: 
+            - 1433:1433
+        volumes: 
+            - ./Database:/var/opt/mssql/data
+        healthcheck:
+                test: sqlcmd -S SqlServer -U SA -P 'P@ssw0rd' -Q 'select @@SERVERNAME'
+
+    backgroundServer:
+        image: backgroundserverv1.1
+        container_name: BackgroundServer
+        environment:
+            - ENVIRONMENT= Release
+        build: 
+            context: .
+            dockerfile: BackgroundServer.Dockerfile
+        depends_on: 
+            - sqlserver
+        volumes: 
+            - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
+        command: ["wait-for-it.sh", "sqlserver:1433","-t", "30", "--", "dotnet", "BackgroundServer.Client.ConsoleApplication.dll"]
+
+   
